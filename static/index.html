@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akmal & Shaxnoza - To'y Taklifnomasi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f9e4e4, #f3f0ff);
+            overflow-x: hidden;
+        }
+        .message-container {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0;
+            background: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1350&q=80') no-repeat center/cover;
+            background-attachment: fixed;
+            color: #fff;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .heart {
+            font-size: 2rem;
+            color: #ff6b6b;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .invitation-details {
+            font-size: 1.3rem;
+            color: #f1f1f1;
+            margin-bottom: 30px;
+            font-style: italic;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .invitation-text {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            margin-top: 40px;
+            text-align: center;
+            font-style: italic;
+            color: #f1f1f1;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 60px 0 40px;
+            font-weight: 500;
+            color: #2d3436;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background: #ff6b6b;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .location {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+
+        .location:hover {
+            transform: translateY(-10px);
+        }
+
+        .location-name {
+            font-style: italic;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+
+        .map-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: #fff;
+            border: none;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .map-btn:hover {
+            background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .gallery {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            height: 220px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .lightbox-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .lightbox-img {
+            max-width: 85%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeInLightbox 0.5s ease;
+        }
+
+        @keyframes fadeInLightbox {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-lightbox:hover {
+            transform: rotate(90Ding);
+        }
+
+        .prev-btn, .next-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        .prev-btn {
+            left: 20px;
+        }
+
+        .next-btn {
+            right: 20px;
+        }
+
+        .wishes {
+            margin: 60px 0;
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .wishes-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2d3436;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 8px rgba(255, 107, 107, 0.3);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 160px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .wishes-list {
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            padding-top: 30px;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            overflow: hidden;
+        }
+        .wish-item {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            background: #fafafa;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease;
+            transition: transform 0.3s ease;
+        }
+
+        .wish-item:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .wish-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .wish-name {
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: #2d3436;
+        }
+
+        .wish-date {
+            color: #999;
+            font-size: 0.95rem;
+        }
+
+        .wish-message {
+            font-style: italic;
+            color: #555;
+        }
+
+        .delete-wish {
+            position: absolute;
+            top: 50px;
+            right: 15px;
+            cursor: pointer;
+            color: #ff6b6b;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .delete-wish:hover {
+            transform: scale(1.2);
+        }
+
+        .status-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-indicator.connected {
+            display: flex;
+            align-items: center;
+        }
+
+        .status-indicator.disconnected {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            display: flex;
+            align-items: center;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background: #fff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid #eee;
+            color: #777;
+            background: #fff;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #ff6b6b;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #333;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 9999;
+            animation: slideIn 0.3s, fadeOut 0.3s 2.7s;
+            animation-fill-mode: forwards;
+        }
+
+        .toast.success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+
+        .toast.error {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            h2 {
+                font-size: 3rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .location, .gallery, .wishes {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>G'olibjon</h1>
+            <div class="heart">❤</div>
+            <h2>Hilola</h2>
+            <div class="invitation-details">
+                10 - May Shanba  19:00 PM<br>
+                Tantanalar Markazi, Tashkent, Uzbekistan
+            </div>
+            <div class="invitation-text">
+                Biz ikki yosh bir oila bo'lib, yangi bir baxt ko'chasidan ilk qadamlarimizni tashlashga shaylanib turibmiz. Bizning baxt visol oqshomimizda birga bo'lishingizni istab to'yimizga taklif etib qolamiz.
+            </div>
+        </div>
+    </header>
+
+    <section class="location">
+        <div class="container">
+            <h3 class="section-title">Manzil</h3>
+            <div class="location-name">Tantanalar Markazi, Tashkent, Uzbekistan</div>
+            <a href="#" target="_blank" class="map-btn">Xarita <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <div class="container">
+            <h3 class="section-title">Galereya</h3>
+            <div class="gallery-container">
+                <div class="gallery-item" data-index="0">
+                    <img src="/static/test.jpg" alt="To'y rasmi 1">
+                </div>
+                <div class="gallery-item" data-index="1">
+                    <img src="/static/test2.jpg" alt="To'y rasmi 2">
+                </div>
+                <div class="gallery-item" data-index="2">
+                    <img src="/static/test.jpg" alt="To'y rasmi 3">
+                </div>
+                <div class="gallery-item" data-index="3">
+                    <img src="/static/test.jpg" alt="To'y rasmi 4">
+                </div>
+                <div class="gallery-item" data-index="4">
+                    <img src="/static/test2.jpg" alt="To'y rasmi 5">
+                </div>
+                <div class="gallery-item" data-index="5">
+                    <img src="/static/test.jpg" alt="To'y rasmi 6">
+                </div>
+                <div class="gallery-item" data-index="6">
+                    <img src="/static/test2.jpg" alt="To'y rasmi 7">
+                </div>
+                <div class="gallery-item" data-index="7">
+                    <img src="/static/test.jpg" alt="To'y rasmi 8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="lightbox">
+        <span class="close-lightbox">×</span>
+        <span class="prev-btn"><i class="fas fa-chevron-left"></i></span>
+        <span class="next-btn"><i class="fas fa-chevron-right"></i></span>
+        <div class="lightbox-content">
+            <img src="" alt="Enlarged image" class="lightbox-img">
+        </div>
+    </div>
+
+    <section class="wishes">
+        <div class="container">
+            <h3 class="section-title">Tilaklar</h3>
+            <div class="wishes-form">
+                <form id="wishForm">
+                    <div class="form-group">
+                        <label for="nameInput">Ism</label>
+                        <input type="text" id="nameInput" class="form-control" placeholder="Ism kiriting">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordInput">Parol</label>
+                        <input type="password" id="passwordInput" class="form-control" placeholder="Parol kiriting (o'chirish uchun kerak bo'ladi)">
+                    </div>
+                    <div class="form-group">
+                        <label for="wishInput">Tilak matni</label>
+                        <textarea id="wishInput" class="form-control" placeholder="Tilak matnini kiriting"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Tilak qoldirish
+                        <span id="submitSpinner" class="spinner" style="display: none;"></span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="wishes-list" id="wishesList">
+                <div id="loadingWishes" style="text-align: center; padding: 20px;">
+                    <span class="spinner"></span> Tilaklar yuklanmoqda...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Online</span>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script>
+        // Global variables
+        let socket;
+        let pingInterval;
+        let reconnectTimeout;
+        let wishes = [];
+        const statusIndicator = document.querySelector('.status-indicator');
+        const statusText = document.querySelector('.status-text');
+        const wishForm = document.getElementById('wishForm');
+        const wishesList = document.getElementById('wishesList');
+        const loadingWishes = document.getElementById('loadingWishes');
+        const submitBtn = wishForm.querySelector('.submit-btn');
+        const submitSpinner = document.getElementById('submitSpinner');
+        const toast = document.getElementById('toast');
+
+        // Toast notification function
+        function showToast(message, type = 'success') {
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // WebSocket connection
+        function connectWebSocket() {
+            if (reconnectTimeout) {
+                clearTimeout(reconnectTimeout);
+            }
+            if (pingInterval) {
+                clearInterval(pingInterval);
+            }
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}/ws`;
+            socket = new WebSocket(wsUrl);
+            socket.onopen = function() {
+                console.log('WebSocket connected');
+                statusIndicator.className = 'status-indicator connected';
+                statusText.textContent = 'Online';
+                pingInterval = setInterval(() => {
+                    if (socket && socket.readyState === WebSocket.OPEN) {
+                        socket.send('ping');
+                    }
+                }, 30000);
+            };
+            socket.onclose = function() {
+                console.log('WebSocket disconnected');
+                statusIndicator.className = 'status-indicator disconnected';
+                statusText.textContent = 'Offline';
+                if (pingInterval) {
+                    clearInterval(pingInterval);
+                }
+                reconnectTimeout = setTimeout(connectWebSocket, 5000);
+            };
+            socket.onerror = function(error) {
+                console.error('WebSocket error:', error);
+                statusIndicator.className = 'status-indicator disconnected';
+                statusText.textContent = 'Error';
+            };
+            socket.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                console.log('WebSocket message:', data);
+                if (data.action === 'new_wish') {
+                    addWishToList(data.wish);
+                } else if (data.action === 'delete_wish') {
+                    removeWishFromList(data.id);
+                }
+            };
+        }
+
+        // Gallery lightbox functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox-img');
+        const closeLightbox = document.querySelector('.close-lightbox');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentImgIndex = 0;
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                currentImgIndex = parseInt(this.getAttribute('data-index'));
+                lightboxImg.src = imgSrc;
+                lightbox.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeLightbox.addEventListener('click', function() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        nextBtn.addEventListener('click', function() {
+            currentImgIndex++;
+            if (currentImgIndex >= galleryItems.length) {
+                currentImgIndex = 0;
+            }
+            const nextImgSrc = galleryItems[currentImgIndex].querySelector('img').src;
+            lightboxImg.src = nextImgSrc;
+        });
+
+        prevBtn.addEventListener('click', function() {
+            currentImgIndex--;
+            if (currentImgIndex < 0) {
+                currentImgIndex = galleryItems.length - 1;
+            }
+            const prevImgSrc = galleryItems[currentImgIndex].querySelector('img').src;
+            lightboxImg.src = prevImgSrc;
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.style.display === 'block') {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        function addWishToList(wish) {
+            const existingWish = document.querySelector(`.wish-item[data-id="${wish.id}"]`);
+            if (existingWish) {
+                return;
+            }
+            wishes.unshift(wish);
+            const wishElement = document.createElement('div');
+            wishElement.className = 'wish-item';
+            wishElement.setAttribute('data-id', wish.id);
+            wishElement.innerHTML = `
+                <div class="wish-header">
+                    <div class="wish-name">${escapeHTML(wish.name)}</div>
+                    <div class="wish-date">${escapeHTML(wish.date)}</div>
+                </div>
+                <div class="wish-message">${escapeHTML(wish.message)}</div>
+                <span class="delete-wish" data-id="${wish.id}">❌</span>
+            `;
+            const deleteBtn = wishElement.querySelector('.delete-wish');
+            deleteBtn.addEventListener('click', showDeleteDialog);
+            if (wishesList.firstChild) {
+                wishesList.insertBefore(wishElement, wishesList.firstChild);
+            } else {
+                wishesList.appendChild(wishElement);
+            }
+        }
+
+        function removeWishFromList(wishId) {
+            wishes = wishes.filter(w => w.id !== wishId);
+            const wishElement = document.querySelector(`.wish-item[data-id="${wishId}"]`);
+            if (wishElement) {
+                wishElement.style.animation = 'fadeOut 0.3s ease forwards';
+                setTimeout(() => {
+                    wishElement.remove();
+                }, 300);
+            }
+        }
+
+        async function fetchWishes() {
+            try {
+                const response = await fetch('/api/wishes');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch wishes');
+                }
+                const data = await response.json();
+                loadingWishes.style.display = 'none';
+                wishesList.innerHTML = '';
+                wishes = data;
+                if (data.length === 0) {
+                    wishesList.innerHTML = '<p style="text-align: center; padding: 20px; color: #999;">Hali tilaklar yo\'q. Birinchi bo\'lib tilak qoldiring!</p>';
+                } else {
+                    data.forEach(wish => addWishToList(wish));
+                }
+            } catch (error) {
+                console.error('Error fetching wishes:', error);
+                loadingWishes.textContent = 'Tilaklarni yuklashda xatolik yuz berdi. Qayta urinib ko\'ring.';
+                showToast('Tilaklarni yuklashda xatolik yuz berdi', 'error');
+            }
+        }
+
+        async function submitWish(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('nameInput');
+            const passwordInput = document.getElementById('passwordInput');
+            const wishInput = document.getElementById('wishInput');
+            if (!nameInput.value.trim()) {
+                showToast('Iltimos, ismingizni kiriting', 'error');
+                nameInput.focus();
+                return;
+            }
+            if (!passwordInput.value.trim()) {
+                showToast('Iltimos, parol kiriting', 'error');
+                passwordInput.focus();
+                return;
+            }
+            if (!wishInput.value.trim()) {
+                showToast('Iltimos, tilak matnini kiriting', 'error');
+                wishInput.focus();
+                return;
+            }
+            submitBtn.disabled = true;
+            submitSpinner.style.display = 'inline-block';
+            try {
+                const response = await fetch('/api/wishes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: nameInput.value.trim(),
+                        password: passwordInput.value.trim(),
+                        message: wishInput.value.trim()
+                    })
+                });
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Failed to submit wish');
+                }
+                nameInput.value = '';
+                passwordInput.value = '';
+                wishInput.value = '';
+                showToast('Tilak muvaffaqiyatli qo\'shildi!');
+            } catch (error) {
+                console.error('Error submitting wish:', error);
+                showToast('Tilakni saqlashda xatolik yuz berdi', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitSpinner.style.display = 'none';
+            }
+        }
+
+        function showDeleteDialog() {
+            const wishId = this.getAttribute('data-id');
+            const password = prompt('O\'chirish uchun parolni kiriting:');
+            if (password) {
+                deleteWish(wishId, password);
+            }
+        }
+
+        async function deleteWish(wishId, password) {
+            try {
+                const response = await fetch(`/api/wishes/${wishId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        password: password
+                    })
+                });
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Failed to delete wish');
+                }
+                showToast('Tilak muvaffaqiyatli o\'chirildi');
+            } catch (error) {
+                console.error('Error deleting wish:', error);
+                showToast('Tilakni o\'chirishda xatolik yuz berdi. Parol to\'g\'rimi?', 'error');
+            }
+        }
+
+        function escapeHTML(str) {
+        if (!str) return '';
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchWishes();
+            connectWebSocket();
+            wishForm.addEventListener('submit', submitWish);
+        });
+    </script>
+</body>
+</html>
