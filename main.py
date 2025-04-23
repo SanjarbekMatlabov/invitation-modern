@@ -10,22 +10,34 @@ import asyncio
 import uvicorn
 import hashlib
 import uuid
+import databases
+import sqlalchemy
+from sqlalchemy import Column, String, MetaData, Table, create_engine, select, desc, delete
+
+# PostgreSQL Database URL
+DATABASE_URL = "postgresql://wishes:HHGqpNh9JAukOfMbi9qPutwWRw9uB7Pg@dpg-d04ig2i4d50c73a7lj9g-a/wishes_pxer"
 
 # Create FastAPI app
 app = FastAPI(title="Wedding Invitation API")
 
-# Ensure data directory exists
-if not os.path.exists("data"):
-    os.makedirs("data")
+# Set up database
+database = databases.Database(DATABASE_URL)
+metadata = MetaData()
 
-# Path to wishes.json
-WISHES_PATH = "data/wishes.json"
+# Define wishes table
+wishes = Table(
+    "wishes",
+    metadata,
+    Column("id", String, primary_key=True),
+    Column("name", String),
+    Column("message", String),
+    Column("password_hash", String),
+    Column("date", String),
+)
 
-# Create wishes.json if it doesn't exist
-if not os.path.exists(WISHES_PATH):
-    with open(WISHES_PATH, "w") as f:
-        json.dump({"wishes": []}, f)
-
+# Create tables
+engine = create_engine(DATABASE_URL)
+metadata.create_all(engine)
 
 # Models
 class WishBase(BaseModel):
@@ -67,16 +79,6 @@ manager = ConnectionManager()
 
 
 # Helper functions
-def read_wishes():
-    with open(WISHES_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def write_wishes(wishes_data):
-    with open(WISHES_PATH, "w", encoding="utf-8") as f:
-        json.dump(wishes_data, f, ensure_ascii=False, indent=2)
-
-
 def get_formatted_date():
     now = datetime.now()
     return now.strftime("%d/%m/%Y, %H:%M")
@@ -91,20 +93,34 @@ def hash_password(password):
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
+# Startup and shutdown events
+@app.on_event("startup")
+async def startup():
+    await database.connect()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()
+
+
 # API Routes
 @app.get("/api/wishes")
-def get_wishes():
+async def get_wishes():
     try:
-        wishes_data = read_wishes()
+        # Query all wishes and order by date (newest first)
+        query = wishes.select().order_by(desc(wishes.c.date))
+        result = await database.fetch_all(query)
+        
         # Return only necessary information (no passwords)
         sanitized_wishes = [
             {
-                "id": w.get("id", str(i)),  # For backward compatibility
-                "name": w["name"],
-                "message": w["message"],
-                "date": w["date"]
+                "id": row["id"],
+                "name": row["name"],
+                "message": row["message"],
+                "date": row["date"]
             }
-            for i, w in enumerate(wishes_data["wishes"])
+            for row in result
         ]
         return sanitized_wishes
     except Exception as e:
@@ -114,9 +130,6 @@ def get_wishes():
 @app.post("/api/wishes", status_code=201)
 async def add_wish(wish: WishCreate):
     try:
-        # Read existing wishes
-        wishes_data = read_wishes()
-        
         # Generate unique ID and hash password
         wish_id = str(uuid.uuid4())
         hashed_password = hash_password(wish.password)
@@ -130,11 +143,9 @@ async def add_wish(wish: WishCreate):
             "date": get_formatted_date()
         }
         
-        # Add new wish to beginning of array
-        wishes_data["wishes"].insert(0, new_wish)
-        
-        # Save updated wishes
-        write_wishes(wishes_data)
+        # Insert into database
+        query = wishes.insert().values(**new_wish)
+        await database.execute(query)
         
         # Create sanitized response (without password)
         response = {
@@ -158,46 +169,28 @@ async def add_wish(wish: WishCreate):
 @app.delete("/api/wishes/{wish_id}")
 async def delete_wish(wish_id: str, wish_delete: WishDelete):
     try:
-        # Read existing wishes
-        wishes_data = read_wishes()
-        
         # Find wish by ID
-        for i, wish in enumerate(wishes_data["wishes"]):
-            stored_id = wish.get("id")
-            
-            # Handle case where wish has no ID (backward compatibility)
-            if stored_id is None and wish_id.isdigit() and i == int(wish_id):
-                stored_id = str(i)
-            
-            if stored_id == wish_id:
-                # Check password - handle both new hashed passwords and legacy plain passwords
-                if "password_hash" in wish:
-                    # New system with hashed passwords
-                    if hash_password(wish_delete.password) != wish["password_hash"]:
-                        raise HTTPException(status_code=401, detail="Invalid password")
-                elif "password" in wish:
-                    # Legacy system with plaintext passwords
-                    if wish_delete.password != wish["password"]:
-                        raise HTTPException(status_code=401, detail="Invalid password")
-                else:
-                    raise HTTPException(status_code=401, detail="Password verification failed")
-                
-                # Remove wish
-                wishes_data["wishes"].pop(i)
-                
-                # Save updated wishes
-                write_wishes(wishes_data)
-                
-                # Broadcast to all connected clients
-                await manager.broadcast({
-                    "action": "delete_wish",
-                    "id": wish_id
-                })
-                
-                return {"message": "Wish deleted successfully"}
+        query = wishes.select().where(wishes.c.id == wish_id)
+        wish = await database.fetch_one(query)
         
-        # If we got here, wish wasn't found
-        raise HTTPException(status_code=404, detail="Wish not found")
+        if not wish:
+            raise HTTPException(status_code=404, detail="Wish not found")
+        
+        # Check password
+        if hash_password(wish_delete.password) != wish["password_hash"]:
+            raise HTTPException(status_code=401, detail="Invalid password")
+        
+        # Remove wish
+        delete_query = wishes.delete().where(wishes.c.id == wish_id)
+        await database.execute(delete_query)
+        
+        # Broadcast to all connected clients
+        await manager.broadcast({
+            "action": "delete_wish",
+            "id": wish_id
+        })
+        
+        return {"message": "Wish deleted successfully"}
     
     except HTTPException:
         raise

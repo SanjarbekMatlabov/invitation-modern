@@ -4,3 +4,7 @@ python-multipart
 pydantic
 aiofiles
 websockets
+sqlalchemy
+asyncpg
+psycopg2-binary
+databases
