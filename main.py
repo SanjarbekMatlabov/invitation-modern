@@ -15,8 +15,10 @@ import sqlalchemy
 from sqlalchemy import Column, String, MetaData, Table, create_engine, select, desc, delete
 
 # PostgreSQL Database URL
-DATABASE_URL = "postgresql://wishes:HHGqpNh9JAukOfMbi9qPutwWRw9uB7Pg@dpg-d04ig2i4d50c73a7lj9g-a/wishes_pxer"
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
 # Create FastAPI app
 app = FastAPI(title="Wedding Invitation API")
 
