@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,12 +21,15 @@
             color: #333;
             background: linear-gradient(135deg, #f9e4e4, #f3f0ff);
             overflow-x: hidden;
+            position: relative;
         }
+
         .message-container {
-  word-break: break-word;
-  overflow-wrap: break-word;
-  overflow: hidden;
-}
+            word-break: break-word;
+            overflow-wrap: break-word;
+            overflow: hidden;
+        }
+
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -69,12 +73,18 @@
             font-size: 2rem;
             color: #ff6b6b;
             margin: 20px 0;
-            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
         }
 
         h2 {
@@ -133,6 +143,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             transform: translateY(0);
             transition: transform 0.5s ease;
+            position: relative;
         }
 
         .location:hover {
@@ -250,8 +261,15 @@
         }
 
         @keyframes fadeInLightbox {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .close-lightbox {
@@ -265,10 +283,11 @@
         }
 
         .close-lightbox:hover {
-            transform: rotate(90Ding);
+            transform: rotate(90deg);
         }
 
-        .prev-btn, .next-btn {
+        .prev-btn,
+        .next-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -278,7 +297,8 @@
             transition: transform 0.3s ease;
         }
 
-        .prev-btn:hover, .next-btn:hover {
+        .prev-btn:hover,
+        .next-btn:hover {
             transform: translateY(-50%) scale(1.2);
         }
 
@@ -363,6 +383,7 @@
             overflow-wrap: break-word;
             overflow: hidden;
         }
+
         .wish-item {
             padding: 25px;
             border-bottom: 1px solid #eee;
@@ -379,8 +400,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .wish-header {
@@ -391,13 +419,13 @@
 
         .wish-name {
             font-weight: 500;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #2d3436;
         }
 
         .wish-date {
             color: #999;
-            font-size: 0.95rem;
+            font-size: 0.5rem;
         }
 
         .wish-message {
@@ -474,8 +502,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .toast {
@@ -502,13 +535,163 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Play Button and Hearts Animation Styles */
+        .play-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .play-btn:hover {
+            background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .play-btn i {
+            font-size: 1.5rem;
+        }
+
+        .heart-particle {
+            position: fixed;
+            color: #ff6b6b;
+            font-size: 1rem;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 10;
+            animation: heartFloat 3s ease-in-out forwards;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Tooltip for Play Button */
+        .play-tooltip {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 150;
+            max-width: 250px;
+            text-align: center;
+            /* animation: floatBounce 2s ease-in-out infinite, fadeInTooltip 0.5s ease; */
+            display: none;
+            pointer-events: none;
+        }
+
+        .play-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: #ff6b6b transparent transparent transparent;
+        }
+
+        /* Tooltip for Location */
+        .location-tooltip {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 150;
+            max-width: 300px;
+            text-align: center;
+            animation: floatBounce 2s ease-in-out infinite, fadeInTooltip 0.5s ease;
+            display: none;
+            pointer-events: none;
+        }
+
+        .location-tooltip::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 10px 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent #ff6b6b transparent;
+        }
+
+        @keyframes floatBounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        @keyframes fadeInTooltip {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
@@ -524,8 +707,27 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .location, .gallery, .wishes {
+            .location,
+            .gallery,
+            .wishes {
                 padding: 30px;
+            }
+
+            .play-tooltip {
+                max-width: 200px;
+                font-size: 0.9rem;
+                left: 15px;
+                bottom: 70px;
+            }
+
+            .play-tooltip::after {
+                left: 15px;
+            }
+
+            .location-tooltip {
+                max-width: 250px;
+                font-size: 0.9rem;
+                bottom: -50px;
             }
         }
 
@@ -545,9 +747,27 @@
             .section-title {
                 font-size: 2rem;
             }
+
+            .play-tooltip {
+                max-width: 150px;
+                font-size: 0.8rem;
+                left: 10px;
+                bottom: 60px;
+            }
+
+            .play-tooltip::after {
+                left: 10px;
+            }
+
+            .location-tooltip {
+                max-width: 200px;
+                font-size: 0.8rem;
+                bottom: -40px;
+            }
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -555,11 +775,12 @@
             <div class="heart">❤</div>
             <h2>Hilola</h2>
             <div class="invitation-details">
-                10 - May Shanba  19:00 PM<br>
-                Tantanalar Markazi, Tashkent, Uzbekistan
+                10 - May Shanba 18:00<br>
+                Jizzax viloyati, Sharof Rashidov tumani, "Shohsaroy" to'yxonasi
             </div>
             <div class="invitation-text">
-                Biz ikki yosh bir oila bo'lib, yangi bir baxt ko'chasidan ilk qadamlarimizni tashlashga shaylanib turibmiz. Bizning baxt visol oqshomimizda birga bo'lishingizni istab to'yimizga taklif etib qolamiz.
+                Biz ikki yosh bir oila bo'lib, yangi bir baxt ko'chasidan ilk qadamlarimizni tashlashga shaylanib
+                turibmiz. Bizning baxt visol oqshomimizda birga bo'lishingizni istab to'yimizga taklif etib qolamiz.
             </div>
         </div>
     </header>
@@ -567,11 +788,15 @@
     <section class="location">
         <div class="container">
             <h3 class="section-title">Manzil</h3>
-            <div class="location-name">Tantanalar Markazi, Tashkent, Uzbekistan</div>
-            <a href="#" target="_blank" class="map-btn">Xarita <i class="fas fa-arrow-right"></i></a>
+            <div class="location-name">Jizzax viloyati, Sharof Rashidov tumani, "Shohsaroy" to'yxonasi</div>
+            <a href="https://maps.app.goo.gl/GBR9VW8yQpJ2Mrn76" target="_blank" class="map-btn">Xarita <i
+                    class="fas fa-arrow-right"></i></a>
+            <div class="location-tooltip" id="locationTooltip">
+                To'yxonamiz manzilini xaritada ko'ring! 🗺️ Tugmani bosing! 😊
+            </div>
         </div>
     </section>
-
+<!-- 
     <section class="gallery">
         <div class="container">
             <h3 class="section-title">Galereya</h3>
@@ -602,7 +827,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <div class="lightbox">
         <span class="close-lightbox">×</span>
@@ -624,7 +849,8 @@
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Parol</label>
-                        <input type="password" id="passwordInput" class="form-control" placeholder="Parol kiriting (o'chirish uchun kerak bo'ladi)">
+                        <input type="password" id="passwordInput" class="form-control"
+                            placeholder="Parol kiriting (o'chirish uchun kerak bo'ladi)">
                     </div>
                     <div class="form-group">
                         <label for="wishInput">Tilak matni</label>
@@ -645,12 +871,21 @@
         </div>
     </section>
 
+    <button class="play-btn" id="playBtn">
+        <i class="fas fa-play"></i>
+    </button>
+
+    <div class="play-tooltip" id="playTooltip">
+        Keling, ajoyib musiqa eshitamiz! 🎶 Bu tugmani bosing! 😊
+    </div>
+
     <div class="status-indicator">
         <span class="status-dot"></span>
         <span class="status-text">Online</span>
     </div>
 
     <div id="toast" class="toast"></div>
+
     <script>
         // Global variables
         let socket;
@@ -666,6 +901,15 @@
         const submitSpinner = document.getElementById('submitSpinner');
         const toast = document.getElementById('toast');
 
+        // Audio and Heart Animation Variables
+        const playBtn = document.getElementById('playBtn');
+        const playTooltip = document.getElementById('playTooltip');
+        const locationTooltip = document.getElementById('locationTooltip');
+        const mapBtn = document.querySelector('.map-btn');
+        const audio = new Audio('./static/shape.mp3'); // Replace with your audio file
+        let isPlaying = false;
+        let audioContext, analyser, dataArray;
+
         // Toast notification function
         function showToast(message, type = 'success') {
             toast.textContent = message;
@@ -675,6 +919,69 @@
                 toast.style.display = 'none';
             }, 3000);
         }
+
+        // Show Play Button Tooltip
+        function showPlayTooltip() {
+            playTooltip.style.display = 'block';
+            setTimeout(() => {
+                playTooltip.style.animation = 'fadeOut 0.5s ease forwards';
+                setTimeout(() => {
+                    playTooltip.style.display = 'none';
+                    playTooltip.style.animation = ''; // Reset animation for potential reuse
+                }, 500);
+            }, 7000); // Show tooltip for 5 seconds
+        }
+
+        // Show Location Tooltip
+        function showLocationTooltip() {
+            locationTooltip.style.display = 'block';
+            setTimeout(() => {
+                locationTooltip.style.animation = 'fadeOut 0.5s ease forwards';
+                setTimeout(() => {
+                    locationTooltip.style.display = 'none';
+                    locationTooltip.style.animation = ''; // Reset animation for potential reuse
+                }, 500);
+            }, 100000); // Show tooltip for 5 seconds
+        }
+
+        // Hide Tooltip on Play Button Click
+        playBtn.addEventListener('click', () => {
+            if (playTooltip.style.display === 'block') {
+                playTooltip.style.animation = 'fadeOut 0.3s ease forwards';
+                setTimeout(() => {
+                    playTooltip.style.display = 'none';
+                    playTooltip.style.animation = '';
+                }, 300);
+            }
+            if (!audioContext) {
+                initAudioContext();
+            }
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                isPlaying = false;
+            } else {
+                audio.play().then(() => {
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    isPlaying = true;
+                    animateHearts();
+                }).catch(err => {
+                    console.error('Audio play error:', err);
+                    showToast('Musiqani ijro etishda xatolik yuz berdi', 'error');
+                });
+            }
+        });
+
+        // Hide Location Tooltip on Map Button Click
+        mapBtn.addEventListener('click', () => {
+            if (locationTooltip.style.display === 'block') {
+                locationTooltip.style.animation = 'fadeOut 0.3s ease forwards';
+                setTimeout(() => {
+                    locationTooltip.style.display = 'none';
+                    locationTooltip.style.animation = '';
+                }, 300);
+            }
+        });
 
         // WebSocket connection
         function connectWebSocket() {
@@ -687,7 +994,7 @@
             const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
             const wsUrl = `${protocol}//${window.location.host}/ws`;
             socket = new WebSocket(wsUrl);
-            socket.onopen = function() {
+            socket.onopen = function () {
                 console.log('WebSocket connected');
                 statusIndicator.className = 'status-indicator connected';
                 statusText.textContent = 'Online';
@@ -697,7 +1004,7 @@
                     }
                 }, 30000);
             };
-            socket.onclose = function() {
+            socket.onclose = function () {
                 console.log('WebSocket disconnected');
                 statusIndicator.className = 'status-indicator disconnected';
                 statusText.textContent = 'Offline';
@@ -706,12 +1013,12 @@
                 }
                 reconnectTimeout = setTimeout(connectWebSocket, 5000);
             };
-            socket.onerror = function(error) {
+            socket.onerror = function (error) {
                 console.error('WebSocket error:', error);
                 statusIndicator.className = 'status-indicator disconnected';
                 statusText.textContent = 'Error';
             };
-            socket.onmessage = function(event) {
+            socket.onmessage = function (event) {
                 const data = JSON.parse(event.data);
                 console.log('WebSocket message:', data);
                 if (data.action === 'new_wish') {
@@ -732,7 +1039,7 @@
         let currentImgIndex = 0;
 
         galleryItems.forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 const imgSrc = this.querySelector('img').src;
                 currentImgIndex = parseInt(this.getAttribute('data-index'));
                 lightboxImg.src = imgSrc;
@@ -741,12 +1048,12 @@
             });
         });
 
-        closeLightbox.addEventListener('click', function() {
+        closeLightbox.addEventListener('click', function () {
             lightbox.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
 
-        nextBtn.addEventListener('click', function() {
+        nextBtn.addEventListener('click', function () {
             currentImgIndex++;
             if (currentImgIndex >= galleryItems.length) {
                 currentImgIndex = 0;
@@ -755,7 +1062,7 @@
             lightboxImg.src = nextImgSrc;
         });
 
-        prevBtn.addEventListener('click', function() {
+        prevBtn.addEventListener('click', function () {
             currentImgIndex--;
             if (currentImgIndex < 0) {
                 currentImgIndex = galleryItems.length - 1;
@@ -764,11 +1071,50 @@
             lightboxImg.src = prevImgSrc;
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && lightbox.style.display === 'block') {
                 lightbox.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
+        });
+
+        // Audio and Heart Animation Functions
+        function initAudioContext() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 256;
+            const source = audioContext.createMediaElementSource(audio);
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-particle';
+            heart.innerHTML = '❤';
+            heart.style.left = `${Math.random() * window.innerWidth}px`;
+            heart.style.bottom = '0';
+            document.body.appendChild(heart);
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        function animateHearts() {
+            if (!isPlaying) return;
+            analyser.getByteFrequencyData(dataArray);
+            const avgFrequency = dataArray.reduce((sum, val) => sum + val, 0) / dataArray.length;
+            const heartFrequency = Math.min(1000, 100 + avgFrequency * 5);
+            if (Math.random() < heartFrequency / 1000) {
+                createHeart();
+            }
+            requestAnimationFrame(animateHearts);
+        }
+
+        audio.addEventListener('ended', () => {
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
         });
 
         function addWishToList(wish) {
@@ -912,20 +1258,23 @@
         }
 
         function escapeHTML(str) {
-        if (!str) return '';
-        return str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
+            if (!str) return '';
+            return str
+                .replace(/&/g, '&')
+                .replace(/</g, '<')
+                .replace(/>/g, '>')
+                .replace(/"/g, '"')
+                .replace(/'/g, "'")
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             fetchWishes();
             connectWebSocket();
             wishForm.addEventListener('submit', submitWish);
+            showPlayTooltip(); // Show play button tooltip on page load
+            showLocationTooltip(); // Show location tooltip on page load
         });
     </script>
 </body>
+
 </html>
