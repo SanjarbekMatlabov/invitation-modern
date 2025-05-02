@@ -316,6 +316,7 @@
             background: #fff;
             border-radius: 15px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: auto;
         }
 
         .wishes-form {
@@ -381,7 +382,7 @@
             padding-top: 30px;
             word-break: break-word;
             overflow-wrap: break-word;
-            overflow: hidden;
+            overflow: auto;
         }
 
         .wish-item {
@@ -796,7 +797,7 @@
             </div>
         </div>
     </section>
-<!-- 
+    <!-- 
     <section class="gallery">
         <div class="container">
             <h3 class="section-title">Galereya</h3>
@@ -1117,31 +1118,31 @@
             isPlaying = false;
         });
 
-        function addWishToList(wish) {
-            const existingWish = document.querySelector(`.wish-item[data-id="${wish.id}"]`);
-            if (existingWish) {
-                return;
-            }
-            wishes.unshift(wish);
-            const wishElement = document.createElement('div');
-            wishElement.className = 'wish-item';
-            wishElement.setAttribute('data-id', wish.id);
-            wishElement.innerHTML = `
-                <div class="wish-header">
-                    <div class="wish-name">${escapeHTML(wish.name)}</div>
-                    <div class="wish-date">${escapeHTML(wish.date)}</div>
-                </div>
-                <div class="wish-message">${escapeHTML(wish.message)}</div>
-                <span class="delete-wish" data-id="${wish.id}">❌</span>
-            `;
-            const deleteBtn = wishElement.querySelector('.delete-wish');
-            deleteBtn.addEventListener('click', showDeleteDialog);
-            if (wishesList.firstChild) {
-                wishesList.insertBefore(wishElement, wishesList.firstChild);
-            } else {
-                wishesList.appendChild(wishElement);
-            }
-        }
+        // function addWishToList(wish) {
+        //     const existingWish = document.querySelector(`.wish-item[data-id="${wish.id}"]`);
+        //     if (existingWish) {
+        //         return;
+        //     }
+        //     wishes.unshift(wish);
+        //     const wishElement = document.createElement('div');
+        //     wishElement.className = 'wish-item';
+        //     wishElement.setAttribute('data-id', wish.id);
+        //     wishElement.innerHTML = `
+        //         <div class="wish-header">
+        //             <div class="wish-name">${escapeHTML(wish.name)}</div>
+        //             <div class="wish-date">${escapeHTML(wish.date)}</div>
+        //         </div>
+        //         <div class="wish-message">${escapeHTML(wish.message)}</div>
+        //         <span class="delete-wish" data-id="${wish.id}">❌</span>
+        //     `;
+        //     const deleteBtn = wishElement.querySelector('.delete-wish');
+        //     deleteBtn.addEventListener('click', showDeleteDialog);
+        //     if (wishesList.firstChild) {
+        //         wishesList.insertBefore(wishElement, wishesList.firstChild);
+        //     } else {
+        //         wishesList.appendChild(wishElement);
+        //     }
+        // }
 
         function removeWishFromList(wishId) {
             wishes = wishes.filter(w => w.id !== wishId);
@@ -1154,6 +1155,7 @@
             }
         }
 
+        // Fix for the fetchWishes function
         async function fetchWishes() {
             try {
                 const response = await fetch('/api/wishes');
@@ -1161,13 +1163,17 @@
                     throw new Error('Failed to fetch wishes');
                 }
                 const data = await response.json();
+                console.log('Fetched wishes:', data); // API'dan qancha tilak kelganini tekshirish
+
                 loadingWishes.style.display = 'none';
                 wishesList.innerHTML = '';
                 wishes = data;
+
                 if (data.length === 0) {
                     wishesList.innerHTML = '<p style="text-align: center; padding: 20px; color: #999;">Hali tilaklar yo\'q. Birinchi bo\'lib tilak qoldiring!</p>';
                 } else {
-                    data.forEach(wish => addWishToList(wish));
+                    // Use a separate function for initial loading to avoid duplicate checking
+                    data.forEach(wish => addInitialWish(wish));
                 }
             } catch (error) {
                 console.error('Error fetching wishes:', error);
@@ -1176,6 +1182,49 @@
             }
         }
 
+        // New function for adding wishes during initial load
+        function addInitialWish(wish) {
+            const wishElement = document.createElement('div');
+            wishElement.className = 'wish-item';
+            wishElement.setAttribute('data-id', wish.id);
+            wishElement.innerHTML = `
+        <div class="wish-header">
+            <div class="wish-name">${escapeHTML(wish.name)}</div>
+            <div class="wish-date">${escapeHTML(wish.date)}</div>
+        </div>
+        <div class="wish-message">${escapeHTML(wish.message)}</div>
+        <span class="delete-wish" data-id="${wish.id}">❌</span>
+    `;
+            const deleteBtn = wishElement.querySelector('.delete-wish');
+            deleteBtn.addEventListener('click', showDeleteDialog);
+            wishesList.appendChild(wishElement);
+        }
+
+        function addWishToList(wish) {
+            const existingWish = document.querySelector(`.wish-item[data-id="${wish.id}"]`);
+            if (existingWish) {
+                return;
+            }
+            wishes.unshift(wish);
+            const wishElement = document.createElement('div');
+            wishElement.className = 'wish-item';
+            wishElement.setAttribute('data-id', wish.id);
+            wishElement.innerHTML = `
+        <div class="wish-header">
+            <div class="wish-name">${escapeHTML(wish.name)}</div>
+            <div class="wish-date">${escapeHTML(wish.date)}</div>
+        </div>
+        <div class="wish-message">${escapeHTML(wish.message)}</div>
+        <span class="delete-wish" data-id="${wish.id}">❌</span>
+    `;
+            const deleteBtn = wishElement.querySelector('.delete-wish');
+            deleteBtn.addEventListener('click', showDeleteDialog);
+            if (wishesList.firstChild) {
+                wishesList.insertBefore(wishElement, wishesList.firstChild);
+            } else {
+                wishesList.appendChild(wishElement);
+            }
+        }
         async function submitWish(event) {
             event.preventDefault();
             const nameInput = document.getElementById('nameInput');
